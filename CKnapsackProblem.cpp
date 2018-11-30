@@ -17,7 +17,7 @@ bool CKnapsackProblem::bSetDCapacity(double d_capacity)
 	}
 }
 
-bool CKnapsackProblem::vSetVItemsSize(vector<double> *v_items_size)
+bool CKnapsackProblem::bSetVItemsSize(vector<double> *v_items_size)
 {
 	if (v_items_size != nullptr)
 	{
@@ -31,7 +31,7 @@ bool CKnapsackProblem::vSetVItemsSize(vector<double> *v_items_size)
 
 }
 
-bool CKnapsackProblem::vSetVItemsValue(vector<double>* v_items_value)
+bool CKnapsackProblem::bSetVItemsValue(vector<double>* v_items_value)
 {
 	if (v_items_value != nullptr)
 	{
@@ -42,4 +42,24 @@ bool CKnapsackProblem::vSetVItemsValue(vector<double>* v_items_value)
 	{
 		return false;
 	}
+}
+
+double CKnapsackProblem::dGetAdaptation(CIndividual c_individual)
+{
+	double dValue = 0;
+	double dSize = 0;
+	for (int i = 0; i < c_individual.vGetVGenotype().size(); i++)
+	{
+		if (c_individual.vGetVGenotype().at(i) == 1)
+		{
+			dValue += vItemsSize->at(i);
+			dSize += vItemsValue->at(i);
+		}
+	}
+	return dSize <= dCapacity ? dValue : 0;
+}
+
+int CKnapsackProblem::iGetNumberOfItems()
+{
+	return vItemsSize->size();
 }

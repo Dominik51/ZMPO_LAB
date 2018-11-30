@@ -1,6 +1,7 @@
 #pragma once
 #include "CKnapsackProblem.h"
 #include <vector>
+#include <random>
 using namespace std;
 
 class CGeneticAlgorithm
@@ -16,10 +17,18 @@ public:
 	vector<int> vGetBestSolution();
 
 private:
+	void vGeneratePopulation();
+	int iChooseIndividual(int i_idx1, int i_idx2);
+	void vFindBestIndividual();
+
+	mt19937 gen;
+
 	CKnapsackProblem *cKnapsackProblem;
 	int iPopulationSize;
 	double dCrossoverChance;
 	double dMutationChance;
 	int iIterationsToStop;
+	vector<CIndividual> vPopulation;
+	CIndividual cBestCIndividual;
 
 };
