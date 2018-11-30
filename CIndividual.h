@@ -1,13 +1,14 @@
 #pragma once
+#include <vector>
 
 using namespace std;
 
 class CIndividual
 {
 public:
-	int iGetAdaptation();
+	double iGetAdaptation();
 	void vMutate();
 	CIndividual cCrossover(CIndividual c_individual);
 private:
-	int *genotype = nullptr;
+	vector <double> genotype;
 };

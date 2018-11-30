@@ -1,11 +1,25 @@
 #pragma once
-
+#include "CKnapsackProblem.h"
+#include <vector>
 using namespace std;
 
 class CGeneticAlgorithm
 {
 public:
+	CGeneticAlgorithm();
+	void vRun();
+	bool vSetCKnapsackProblem(CKnapsackProblem *c_knapsack_problem);
+	bool bSetIPopulationSize(int i_population_size);
+	bool bSetDCrossoverChance(double d_crossover_chance);
+	bool bSetDMutationChance(double d_mutation_chance);
+	bool bSIIterationsToStop(int i_iterations_to_stop);
+	vector<int> vGetBestSolution();
 
 private:
+	CKnapsackProblem *cKnapsackProblem;
+	int iPopulationSize;
+	double dCrossoverChance;
+	double dMutationChance;
+	int iIterationsToStop;
 
 };
