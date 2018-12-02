@@ -47,7 +47,7 @@ void CGeneticAlgorithm::vRun()
 
 int CGeneticAlgorithm::iChooseIndividual(int i_idx1, int i_idx2)
 {
-	if (vPopulation.at(i_idx1).dGetAdaptation() >= vPopulation.at(i_idx2).dGetAdaptation())
+	if (vPopulation.at(i_idx1).dGetFitness() >= vPopulation.at(i_idx2).dGetFitness())
 	{
 		return i_idx1;
 	}
@@ -60,16 +60,16 @@ int CGeneticAlgorithm::iChooseIndividual(int i_idx1, int i_idx2)
 void CGeneticAlgorithm::vFindBestIndividual()
 {
 	int iBestIndividual = 0;
-	int iBestAdaptation = vPopulation.at(0).dGetAdaptation();
+	int iBestAdaptation = vPopulation.at(0).dGetFitness();
 	for (int i = 1; i < iPopulationSize; i++)
 	{
-		if (vPopulation.at(i).dGetAdaptation() > iBestAdaptation)
+		if (vPopulation.at(i).dGetFitness() > iBestAdaptation)
 		{
-			iBestAdaptation = vPopulation.at(i).dGetAdaptation();
+			iBestAdaptation = vPopulation.at(i).dGetFitness();
 			iBestIndividual = i;
 		}
 	}
-	if (iBestAdaptation > cBestCIndividual.dGetAdaptation())
+	if (iBestAdaptation > cBestCIndividual.dGetFitness())
 	{
 		cBestCIndividual = vPopulation.at(iBestIndividual);
 	}
@@ -78,7 +78,7 @@ void CGeneticAlgorithm::vFindBestIndividual()
 	{
 		cout << cBestCIndividual.vGetVGenotype().at(i) << ", ";
 	}
-	cout << " -- " << cBestCIndividual.dGetAdaptation() << endl;
+	cout << " -- " << cBestCIndividual.dGetFitness() << endl;
 }
 
 bool CGeneticAlgorithm::vSetCKnapsackProblem(CKnapsackProblem *c_knapsack_problem)

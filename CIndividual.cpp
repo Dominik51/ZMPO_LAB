@@ -9,9 +9,9 @@ CIndividual::CIndividual()
 	cKnapsackProblem = nullptr;
 }
 
-double CIndividual::dGetAdaptation()
+double CIndividual::dGetFitness()
 {
-	return cKnapsackProblem != nullptr ? cKnapsackProblem->dGetAdaptation(vGenotype) : 0;
+	return cKnapsackProblem != nullptr ? cKnapsackProblem->dGetFintess(vGenotype) : 0;
 }
 
 void CIndividual::vMutate(double i_mutatation_chance)

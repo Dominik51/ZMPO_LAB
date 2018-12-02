@@ -8,7 +8,7 @@ class CIndividual
 {
 public:
 	CIndividual();
-	double dGetAdaptation();
+	double dGetFitness();
 	void vMutate(double i_mutatation_chance);
 	vector<CIndividual> vCrossover(CIndividual c_individual);
 	vector<int> vGetVGenotype();

@@ -44,7 +44,7 @@ bool CKnapsackProblem::bSetVItemsValue(vector<double>* v_items_value)
 	}
 }
 
-double CKnapsackProblem::dGetAdaptation(vector <int> v_genotype)
+double CKnapsackProblem::dGetFintess(vector <int> v_genotype)
 {
 	double dValue = 0;
 	double dSize = 0;
