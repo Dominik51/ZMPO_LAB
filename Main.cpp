@@ -30,7 +30,7 @@ int main()
 	cga.bSetIPopulationSize(4);
 	cga.bSetDCrossoverChance(0.4);
 	cga.bSetDMutationChance(0.5);
-	cga.bSIIterationsToStop(100);
+	cga.bSetIIterationsToStop(100);
 
 	cga.vRun();
 

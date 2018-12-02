@@ -139,7 +139,7 @@ bool CGeneticAlgorithm::bSetDMutationChance(double d_mutation_chance)
 	}
 }
 
-bool CGeneticAlgorithm::bSIIterationsToStop(int i_iterations_to_stop)
+bool CGeneticAlgorithm::bSetIIterationsToStop(int i_iterations_to_stop)
 {
 	if (i_iterations_to_stop > 0)
 	{
