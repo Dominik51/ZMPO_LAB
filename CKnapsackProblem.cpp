@@ -52,8 +52,8 @@ double CKnapsackProblem::dGetFintess(vector <int> v_genotype)
 	{
 		if (v_genotype.at(i) == 1)
 		{
-			dValue += vItemsSize->at(i);
-			dSize += vItemsValue->at(i);
+			dValue += vItemsValue->at(i);
+			dSize += vItemsSize->at(i);
 		}
 	}
 	return dSize <= dCapacity ? dValue : 0;

@@ -5,6 +5,12 @@ CGeneticAlgorithm::CGeneticAlgorithm()
 	random_device rd;
 	mt19937 generator(rd());
 	gen = generator;
+
+	cKnapsackProblem = nullptr;
+	iPopulationSize = 2;
+	dCrossoverChance = 0.5;
+	dMutationChance = 0.5;
+	iIterationsToStop = 10;
 }
 
 void CGeneticAlgorithm::vRun()
