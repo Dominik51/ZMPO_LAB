@@ -24,7 +24,6 @@ void CGeneticAlgorithm::vRun()
 			idx1 = disInt(gen);
 			idx2 = disInt(gen);
 			int idxCIndividual2 = iChooseIndividual(idx1, idx2);
-
 			if (dCrossoverChance <= disReal(gen))
 			{
 				vector<CIndividual> newCIndividuals = vPopulation.at(idxCIndividual1).vCrossover(vPopulation.at(idxCIndividual2));
@@ -48,7 +47,7 @@ void CGeneticAlgorithm::vRun()
 
 int CGeneticAlgorithm::iChooseIndividual(int i_idx1, int i_idx2)
 {
-	if (cKnapsackProblem->dGetAdaptation(vPopulation.at(i_idx1)) >= cKnapsackProblem->dGetAdaptation(vPopulation.at(i_idx2)))
+	if (vPopulation.at(i_idx1).dGetAdaptation() >= vPopulation.at(i_idx2).dGetAdaptation())
 	{
 		return i_idx1;
 	}
@@ -61,24 +60,25 @@ int CGeneticAlgorithm::iChooseIndividual(int i_idx1, int i_idx2)
 void CGeneticAlgorithm::vFindBestIndividual()
 {
 	int iBestIndividual = 0;
-	int iBestAdaptation = cKnapsackProblem->dGetAdaptation(vPopulation.at(0));
+	int iBestAdaptation = vPopulation.at(0).dGetAdaptation();
 	for (int i = 1; i < iPopulationSize; i++)
 	{
-		if (cKnapsackProblem->dGetAdaptation(vPopulation.at(i)) > iBestAdaptation)
+		if (vPopulation.at(i).dGetAdaptation() > iBestAdaptation)
 		{
-			iBestAdaptation = cKnapsackProblem->dGetAdaptation(vPopulation.at(i));
+			iBestAdaptation = vPopulation.at(i).dGetAdaptation();
 			iBestIndividual = i;
 		}
 	}
-	if (iBestAdaptation > cKnapsackProblem->dGetAdaptation(cBestCIndividual))
+	if (iBestAdaptation > cBestCIndividual.dGetAdaptation())
 	{
 		cBestCIndividual = vPopulation.at(iBestIndividual);
 	}
+
 	for (int i = 0; i < cBestCIndividual.vGetVGenotype().size(); i++)
 	{
 		cout << cBestCIndividual.vGetVGenotype().at(i) << ", ";
 	}
-	cout << " -- " << cKnapsackProblem->dGetAdaptation(cBestCIndividual) << endl;
+	cout << " -- " << cBestCIndividual.dGetAdaptation() << endl;
 }
 
 bool CGeneticAlgorithm::vSetCKnapsackProblem(CKnapsackProblem *c_knapsack_problem)
@@ -163,6 +163,7 @@ void CGeneticAlgorithm::vGeneratePopulation()
 			cIndividualGenotype.push_back(disInt(gen));
 		}
 		cIndividual.vSetVGenotype(cIndividualGenotype);
+		cIndividual.vSetCKnapsackProblem(cKnapsackProblem);
 		vPopulation.push_back(cIndividual);
 	}
 }

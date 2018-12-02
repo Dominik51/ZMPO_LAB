@@ -1,5 +1,6 @@
 #pragma once
 #include "CKnapsackProblem.h"
+#include "CIndividual.h"
 #include <vector>
 #include <random>
 using namespace std;

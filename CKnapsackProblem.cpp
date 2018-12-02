@@ -44,13 +44,13 @@ bool CKnapsackProblem::bSetVItemsValue(vector<double>* v_items_value)
 	}
 }
 
-double CKnapsackProblem::dGetAdaptation(CIndividual c_individual)
+double CKnapsackProblem::dGetAdaptation(vector <int> v_genotype)
 {
 	double dValue = 0;
 	double dSize = 0;
-	for (int i = 0; i < c_individual.vGetVGenotype().size(); i++)
+	for (int i = 0; i < v_genotype.size(); i++)
 	{
-		if (c_individual.vGetVGenotype().at(i) == 1)
+		if (v_genotype.at(i) == 1)
 		{
 			dValue += vItemsSize->at(i);
 			dSize += vItemsValue->at(i);

@@ -1,6 +1,5 @@
 #pragma once
 #include<vector>
-#include "CIndividual.h"
 using namespace std;
 
 class CKnapsackProblem
@@ -10,7 +9,7 @@ public:
 	bool bSetDCapacity(double d_capacity);
 	bool bSetVItemsSize(vector<double> *v_items_size);
 	bool bSetVItemsValue(vector<double> *v_items_value);
-	double dGetAdaptation(CIndividual c_individual);
+	double dGetAdaptation(vector <int> v_genotype);
 	int iGetNumberOfItems();
 private:
 	double dCapacity;

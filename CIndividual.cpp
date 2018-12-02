@@ -5,6 +5,13 @@ CIndividual::CIndividual()
 	random_device rd;
 	mt19937 generator(rd());
 	gen = generator;
+
+	cKnapsackProblem = nullptr;
+}
+
+double CIndividual::dGetAdaptation()
+{
+	return cKnapsackProblem != nullptr ? cKnapsackProblem->dGetAdaptation(vGenotype) : 0;
 }
 
 void CIndividual::vMutate(double i_mutatation_chance)
@@ -51,6 +58,11 @@ vector<CIndividual> CIndividual::vCrossover(CIndividual c_individual)
 void CIndividual::vSetVGenotype(vector <int> v_genotype)
 {
 	vGenotype = v_genotype;
+}
+
+void CIndividual::vSetCKnapsackProblem(CKnapsackProblem * c_knapsack_problem)
+{
+	cKnapsackProblem = c_knapsack_problem;
 }
 
 vector<int> CIndividual::vGetVGenotype()
