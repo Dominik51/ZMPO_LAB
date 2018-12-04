@@ -17,31 +17,19 @@ bool CKnapsackProblem::bSetDCapacity(double d_capacity)
 	}
 }
 
-bool CKnapsackProblem::bSetVItemsSize(vector<double> *v_items_size)
+bool CKnapsackProblem::bSetItems(int i_number_of_items, vector<double>* v_items_value, vector<double>* v_items_size)
 {
-	if (v_items_size != nullptr)
+	if (v_items_size != nullptr && v_items_value != nullptr)
 	{
-		vItemsSize = v_items_size;
-		return true;
+		if (i_number_of_items > 0 && i_number_of_items == v_items_size->size() && i_number_of_items == v_items_value->size())
+		{
+			iNumberOfItems = i_number_of_items;
+			vItemsValue = v_items_value;
+			vItemsSize = v_items_size;
+			return true;
+		}
 	}
-	else
-	{
-		return false;
-	}
-
-}
-
-bool CKnapsackProblem::bSetVItemsValue(vector<double>* v_items_value)
-{
-	if (v_items_value != nullptr)
-	{
-		vItemsValue = v_items_value;
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return false;
 }
 
 double CKnapsackProblem::dGetFintess(vector <int> v_genotype)
@@ -61,5 +49,5 @@ double CKnapsackProblem::dGetFintess(vector <int> v_genotype)
 
 int CKnapsackProblem::iGetNumberOfItems()
 {
-	return vItemsSize->size();
+	return iNumberOfItems;
 }

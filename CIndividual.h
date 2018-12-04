@@ -2,6 +2,7 @@
 #include <vector>
 #include <random>
 #include "CKnapsackProblem.h"
+#include <iostream>
 using namespace std;
 
 class CIndividual
@@ -10,7 +11,7 @@ public:
 	CIndividual();
 	double dGetFitness();
 	void vMutate(double i_mutatation_chance);
-	vector<CIndividual> vCrossover(CIndividual c_individual);
+	vector<CIndividual*> vCrossover(CIndividual *c_individual);
 	vector<int> vGetVGenotype();
 	void vSetVGenotype(vector <int> v_genotype);
 	void vSetCKnapsackProblem(CKnapsackProblem *c_knapsack_problem);

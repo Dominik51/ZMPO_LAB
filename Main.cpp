@@ -5,29 +5,33 @@ using namespace std;
 int main()
 {
 	CKnapsackProblem ckp;
-	ckp.bSetDCapacity(12);
+	ckp.bSetDCapacity(500);
 	
 	vector<double> ItemsValue;
-	ItemsValue.push_back(1);
-	ItemsValue.push_back(2);
-	ItemsValue.push_back(3);
-	ItemsValue.push_back(4);
-	ItemsValue.push_back(5);
+	ItemsValue.push_back(100);
+	ItemsValue.push_back(100);
+	ItemsValue.push_back(100);
+	ItemsValue.push_back(100);
+	ItemsValue.push_back(100);
 
 	vector<double> ItemsWeight;
-	ItemsWeight.push_back(3);
-	ItemsWeight.push_back(3);
-	ItemsWeight.push_back(3);
-	ItemsWeight.push_back(4);
-	ItemsWeight.push_back(5);
+	ItemsWeight.push_back(20);
+	ItemsWeight.push_back(20);
+	ItemsWeight.push_back(20);
+	ItemsWeight.push_back(20);
+	ItemsWeight.push_back(20);
 
-	ckp.bSetVItemsValue(&ItemsValue);
-	ckp.bSetVItemsSize(&ItemsWeight);
+	for (int i = 0; i < 100; i++)
+	{
+		ItemsValue.push_back(1);
+		ItemsWeight.push_back(1);
+	}
 
+	ckp.bSetItems(105, &ItemsValue, &ItemsWeight);
 	CGeneticAlgorithm cga;
 
 	cga.vSetCKnapsackProblem(&ckp);
-	cga.bSetIPopulationSize(4);
+	cga.bSetIPopulationSize(100);
 	cga.bSetDCrossoverChance(0.4);
 	cga.bSetDMutationChance(0.5);
 	cga.bSetIIterationsToStop(100);

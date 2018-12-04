@@ -21,7 +21,9 @@ private:
 	void vGeneratePopulation();
 	int iChooseIndividual(int i_idx1, int i_idx2);
 	void vFindBestIndividual();
-
+	void vCrossPopulation(vector<CIndividual*> *v_new_population);
+	void vMutatePopulation(vector<CIndividual*> *v_new_population);
+	void vDeletePopulation();
 	mt19937 gen;
 
 	CKnapsackProblem *cKnapsackProblem;
@@ -29,7 +31,7 @@ private:
 	double dCrossoverChance;
 	double dMutationChance;
 	int iIterationsToStop;
-	vector<CIndividual> vPopulation;
-	CIndividual cBestCIndividual;
-
+	vector<CIndividual*> vPopulation;
+	vector<int> vBestGenotype;
+	int iBestGenotypeFitness;
 };

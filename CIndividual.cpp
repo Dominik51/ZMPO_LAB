@@ -27,7 +27,7 @@ void CIndividual::vMutate(double i_mutatation_chance)
 	}
 }
 
-vector<CIndividual> CIndividual::vCrossover(CIndividual c_individual)
+vector<CIndividual*> CIndividual::vCrossover(CIndividual *c_individual)
 {
 	uniform_int_distribution<> disInt(1, vGenotype.size() - 1);
 	int iCrossPoint = disInt(gen);
@@ -38,21 +38,26 @@ vector<CIndividual> CIndividual::vCrossover(CIndividual c_individual)
 	for(int i = 0; i < iCrossPoint; i++)
 	{
 		vGenotype1.push_back(vGenotype.at(i));
-		vGenotype2.push_back(c_individual.vGetVGenotype().at(i));
+		vGenotype2.push_back(c_individual->vGetVGenotype().at(i));
 	}
 
 	for (int i = iCrossPoint; i < vGenotype.size(); i++)
 	{
-		vGenotype1.push_back(c_individual.vGetVGenotype().at(i));
+		vGenotype1.push_back(c_individual->vGetVGenotype().at(i));
 		vGenotype2.push_back(vGenotype.at(i));
 	}
 
-	vGenotype = vGenotype1;
-	c_individual.vSetVGenotype(vGenotype2);
-	vector<CIndividual> newCIndividuals;
-	newCIndividuals.push_back(*this);
-	newCIndividuals.push_back(c_individual);
-	return newCIndividuals;
+	CIndividual *cNewIndividual1 = new CIndividual;
+	CIndividual *cNewIndividual2 = new CIndividual;
+	cNewIndividual1->vSetVGenotype(vGenotype1);
+	cNewIndividual1->vSetCKnapsackProblem(cKnapsackProblem);
+
+	cNewIndividual2->vSetVGenotype(vGenotype2);
+	cNewIndividual2->vSetCKnapsackProblem(cKnapsackProblem);
+	vector<CIndividual*> vNewCIndividuals;
+	vNewCIndividuals.push_back(cNewIndividual1);
+	vNewCIndividuals.push_back(cNewIndividual2);
+	return vNewCIndividuals;
 }
 
 void CIndividual::vSetVGenotype(vector <int> v_genotype)
