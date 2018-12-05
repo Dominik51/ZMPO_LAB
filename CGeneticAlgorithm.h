@@ -5,6 +5,12 @@
 #include <random>
 using namespace std;
 
+const int DEFAULT_POPULATION_SIZE = 2;
+const double DEFAULT_CROSS_CHANCE = 0.5;
+const double DEFAULT_MUTATION_CHANCE = 0.5;
+const int DEFAULT_ITERATIONS_TO_STOP = 10;
+const double DEFAULT_BEST_GENOTYPE_FITNESS = -1;
+
 class CGeneticAlgorithm
 {
 public:
@@ -21,8 +27,8 @@ private:
 	void vGeneratePopulation();
 	int iChooseIndividual(int i_idx1, int i_idx2);
 	void vFindBestIndividual();
-	void vCrossPopulation(vector<CIndividual*> *v_new_population);
-	void vMutatePopulation(vector<CIndividual*> *v_new_population);
+	void vCrossPopulation(vector<CIndividual*> *v_population);
+	void vMutatePopulation(vector<CIndividual*> *v_population);
 	void vDeletePopulation();
 	mt19937 gen;
 
@@ -33,5 +39,5 @@ private:
 	int iIterationsToStop;
 	vector<CIndividual*> vPopulation;
 	vector<int> vBestGenotype;
-	int iBestGenotypeFitness;
+	double iBestGenotypeFitness;
 };

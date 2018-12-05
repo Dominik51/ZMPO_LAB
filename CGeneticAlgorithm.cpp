@@ -7,11 +7,11 @@ CGeneticAlgorithm::CGeneticAlgorithm()
 	gen = generator;
 
 	cKnapsackProblem = nullptr;
-	iPopulationSize = 2;
-	dCrossoverChance = 0.5;
-	dMutationChance = 0.5;
-	iIterationsToStop = 10;
-	iBestGenotypeFitness = -1;
+	iPopulationSize = DEFAULT_POPULATION_SIZE;
+	dCrossoverChance = DEFAULT_CROSS_CHANCE;
+	dMutationChance = DEFAULT_MUTATION_CHANCE;
+	iIterationsToStop = DEFAULT_ITERATIONS_TO_STOP;
+	iBestGenotypeFitness = DEFAULT_BEST_GENOTYPE_FITNESS;
 }
 
 void CGeneticAlgorithm::vRun()
@@ -28,13 +28,14 @@ void CGeneticAlgorithm::vRun()
 			vDeletePopulation();
 			vPopulation = vNewPopulation;
 		}
+		vFindBestIndividual();
 		vDeletePopulation();
 	}
 }
 
-void CGeneticAlgorithm::vCrossPopulation(vector<CIndividual*> *v_new_population)
+void CGeneticAlgorithm::vCrossPopulation(vector<CIndividual*> *v_population)
 {
-	while (v_new_population->size() < iPopulationSize)
+	while (v_population->size() < iPopulationSize)
 	{
 		uniform_int_distribution<> disInt(0, iPopulationSize - 1);
 		uniform_real_distribution<> disReal(0, 1);
@@ -45,8 +46,8 @@ void CGeneticAlgorithm::vCrossPopulation(vector<CIndividual*> *v_new_population)
 		if (dCrossoverChance <= disReal(gen))
 		{
 			vector<CIndividual*> newCIndividuals = vPopulation.at(idxCIndividual1)->vCrossover(vPopulation.at(idxCIndividual2));
-			v_new_population->push_back(newCIndividuals.at(0));
-			v_new_population->push_back(newCIndividuals.at(1));
+			v_population->push_back(newCIndividuals.at(0));
+			v_population->push_back(newCIndividuals.at(1));
 		}
 		else
 		{
@@ -58,17 +59,17 @@ void CGeneticAlgorithm::vCrossPopulation(vector<CIndividual*> *v_new_population)
 			cNewIndividual2->vSetVGenotype(vPopulation.at(idxCIndividual2)->vGetVGenotype());
 			cNewIndividual2->vSetCKnapsackProblem(cKnapsackProblem);
 
-			v_new_population->push_back(cNewIndividual1);
-			v_new_population->push_back(cNewIndividual2);
+			v_population->push_back(cNewIndividual1);
+			v_population->push_back(cNewIndividual2);
 		}
 	}
 }
 
-void CGeneticAlgorithm::vMutatePopulation(vector<CIndividual*> *v_new_population)
+void CGeneticAlgorithm::vMutatePopulation(vector<CIndividual*> *v_population)
 {
 	for (int i = 0; i < iPopulationSize; i++)
 	{
-		v_new_population->at(i)->vMutate(dMutationChance);
+		v_population->at(i)->vMutate(dMutationChance);
 	}
 }
 
@@ -109,11 +110,6 @@ void CGeneticAlgorithm::vFindBestIndividual()
 		vBestGenotype = vPopulation.at(iBestIndividual)->vGetVGenotype();
 		iBestGenotypeFitness = cKnapsackProblem->dGetFintess(vBestGenotype);
 	}
-	for (int i = 0; i < vBestGenotype.size(); i++)
-	{
-		cout << vBestGenotype.at(i) << ", ";
-	}
-	cout << " -- " << iBestGenotypeFitness << endl;
 }
 
 bool CGeneticAlgorithm::vSetCKnapsackProblem(CKnapsackProblem *c_knapsack_problem)
@@ -200,10 +196,6 @@ void CGeneticAlgorithm::vGeneratePopulation()
 		cIndividual->vSetVGenotype(cIndividualGenotype);
 		cIndividual->vSetCKnapsackProblem(cKnapsackProblem);
 		vPopulation.push_back(cIndividual);
-	}
-	for (int i = 0; i < vPopulation.size(); i++)
-	{
-		cout << vPopulation.at(i)->dGetFitness() << endl;
 	}
 }
 
